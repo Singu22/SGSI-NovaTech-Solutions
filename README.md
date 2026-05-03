@@ -11,4 +11,4 @@ Sistema de Gestión de Seguridad de la Información diseñado conforme a:
 - Materiales de capacitación (Fase 10)
 - Hoja de ruta de implementación (Mayo 2026 – Mayo 2028)
 
-**NovaTech Solutions · Monterrey, Nuevo León, México · 2025**
+**NovaTech Solutions · Monterrey, Nuevo León, México · 2026**
