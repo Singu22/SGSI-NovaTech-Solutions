@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Hoja de Ruta de Implementación — SGSI NovaTech Solutions</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#1B3A2D;--midgreen:#2E5E48;--lightgreen:#4A8C6F;
+  --gold:#C17F24;--darkgold:#8B5E1A;--bggold:#FDF3E0;
+  --body:#2C2C2C;--silver:#999;--cream:#F7F4EE;
+  --danger:#B83232;--white:#FFFFFF;
+}
+body{background:#d4d0c8;font-family:Georgia,serif;display:flex;justify-content:center;padding:28px 0;min-width:1240px}
+.page{width:1200px;background:var(--white);overflow:hidden}
+
+/* HEADER */
+.header{background:var(--green);display:flex;min-height:108px}
+.hstripe{width:14px;background:var(--gold);flex-shrink:0}
+.hmain{flex:1;padding:20px 26px;display:flex;flex-direction:column;justify-content:center}
+.hlabel{font-family:'Courier New',monospace;font-size:10px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:6px}
+.htitle{font-size:30px;font-weight:bold;color:var(--white);line-height:1.1}
+.hsub{font-style:italic;font-size:13px;color:var(--silver);margin-top:5px}
+.hright{background:#0F2318;width:260px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:16px 18px;text-align:center}
+.hr-label{font-family:'Courier New',monospace;font-size:9px;color:var(--silver);letter-spacing:1px}
+.hr-big{font-size:30px;font-weight:bold;color:var(--gold);line-height:1.1}
+.hr-sep{width:60px;height:1px;background:rgba(193,127,36,.4)}
+.hr-small{font-size:11px;color:var(--white);font-style:italic;line-height:1.5}
+
+/* LEGEND */
+.legend{display:flex;align-items:center;gap:20px;padding:10px 22px;background:var(--cream);border-bottom:2px solid var(--gold)}
+.leg{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--body)}
+.lbox{width:24px;height:13px;border-radius:2px}
+.leg-right{margin-left:auto;font-family:'Courier New',monospace;font-size:10px;color:var(--darkgold)}
+
+/* GANTT */
+.gantt{padding:18px 22px 0}
+
+/* Row layout: label | bars */
+.prow{display:flex;min-height:42px;border-bottom:1px solid #e8e4dc;align-items:stretch}
+.prow:nth-child(even) .bars-zone{background:#FAFAF8}
+.plabel{width:215px;min-width:215px;padding:5px 8px;display:flex;align-items:center;gap:7px;border-right:2px solid #ddd9d2}
+.pnum{background:var(--green);color:var(--gold);font-family:'Courier New',monospace;font-size:9px;font-weight:bold;min-width:26px;width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pname-wrap .pname{font-size:11px;font-weight:bold;color:var(--body);line-height:1.3}
+.pname-wrap .psub{font-size:9px;color:var(--silver);font-style:italic}
+
+/* The bars zone uses CSS custom grid */
+.bars-zone{flex:1;display:grid;grid-template-columns:repeat(24,1fr);align-items:center;padding:4px 0}
+
+/* BARS — key fix: padding-left avoids left-edge clip; grid-column controls position */
+.bar{
+  height:26px;border-radius:2px;
+  display:flex;align-items:center;
+  padding:0 8px;
+  font-family:'Courier New',monospace;font-size:8.5px;font-weight:bold;
+  color:var(--white);letter-spacing:.3px;
+  white-space:nowrap;overflow:hidden;
+}
+.ga{background:var(--green)}
+.gb{background:var(--midgreen)}
+.gc{background:var(--lightgreen)}
+.gd{background:var(--gold)}
+.ge{background:var(--darkgold)}
+
+/* Month/year header rows */
+.mhdr{display:flex;border-bottom:2px solid var(--green)}
+.mhdr .plabel{background:var(--cream);font-family:'Courier New',monospace;font-size:9.5px;color:var(--darkgold);font-weight:bold;letter-spacing:.5px}
+.months{flex:1;display:grid;grid-template-columns:repeat(24,1fr)}
+.year-row{display:flex}
+.year-row .plabel{border-right:2px solid var(--green);background:var(--cream)}
+.year-cols{flex:1;display:grid;grid-template-columns:repeat(24,1fr)}
+.yc{text-align:center;font-family:'Courier New',monospace;font-size:9px;font-weight:bold;color:var(--gold);padding-bottom:2px}
+.mc{text-align:center;font-family:'Courier New',monospace;font-size:8.5px;color:var(--body);padding:0 0 5px;border-left:1px solid #e0ddd8}
+.mc.qs{border-left:1px solid rgba(193,127,36,.6)}
+.mc.yr{border-left:2px solid rgba(193,127,36,.8)}
+
+/* CERTIFICATION ROW */
+.cert-row{display:flex;min-height:42px;border-bottom:2px solid var(--gold);background:var(--bggold)}
+.cert-label{width:215px;min-width:215px;padding:5px 8px;display:flex;align-items:center;gap:7px;border-right:2px solid #ddd9d2;background:var(--bggold)}
+.cert-num{background:var(--darkgold);color:var(--white);font-family:'Courier New',monospace;font-size:11px;font-weight:bold;min-width:26px;width:26px;height:26px;display:flex;align-items:center;justify-content:center}
+
+/* MILESTONE ROW */
+.ms-row{display:flex;min-height:42px;border-bottom:2px solid #ddd}
+.ms-zone{flex:1;display:grid;grid-template-columns:repeat(24,1fr);align-items:center;background:var(--bggold);padding:4px 0}
+.ms-label{width:215px;min-width:215px;padding:5px 8px;display:flex;align-items:center;border-right:2px solid #ddd;background:var(--bggold)}
+.ms-label span{font-family:'Courier New',monospace;font-size:9px;color:var(--danger);font-weight:bold;letter-spacing:.5px}
+.ms{text-align:center;position:relative;padding-top:2px}
+.ms-ico{font-size:22px;line-height:1;display:block}
+.ms-txt{position:absolute;top:24px;left:50%;transform:translateX(-50%);font-family:'Courier New',monospace;font-size:7.5px;font-weight:bold;white-space:nowrap;line-height:1.3;text-align:center}
+
+/* SUMMARY + MATRIX */
+.summary{margin:32px 22px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.scard{border-left:5px solid var(--green);background:var(--cream);padding:11px 14px}
+.sc-label{font-family:'Courier New',monospace;font-size:9px;color:var(--darkgold);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.sc-val{font-size:22px;font-weight:bold;color:var(--green)}
+.sc-sub{font-size:11px;color:var(--silver);font-style:italic;margin-top:2px}
+
+.matrix{margin:14px 22px 0}
+.mx-title{font-family:'Courier New',monospace;font-size:10px;color:var(--darkgold);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;padding-bottom:5px;border-bottom:2px solid var(--gold)}
+.mx-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.mcard{background:var(--green);padding:11px 13px}
+.mc-role{font-family:'Courier New',monospace;font-size:9px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+.mc-list{list-style:none;font-size:10.5px;color:rgba(255,255,255,.88);line-height:1.6}
+.mc-list li{padding-left:11px;position:relative}
+.mc-list li::before{content:"›";position:absolute;left:0;color:var(--gold)}
+
+.gold-bar{height:8px;background:var(--gold);margin-top:18px}
+.footer{background:#0F2318;display:flex;align-items:center;justify-content:space-between;padding:10px 22px}
+.fl{font-family:'Courier New',monospace;font-size:9px;color:var(--gold);letter-spacing:1px}
+.fr{font-family:'Courier New',monospace;font-size:9px;color:var(--silver)}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="hstripe"></div>
+  <div class="hmain">
+    <div class="hlabel">Sistema de Gestión de Seguridad de la Información · Planificación Estratégica</div>
+    <div class="htitle">Hoja de Ruta de Implementación del SGSI</div>
+    <div class="hsub">NovaTech Solutions · Monterrey, México · Mayo 2026 – Mayo 2028 · Propuesta sujeta a aprobación ejecutiva</div>
+  </div>
+  <div class="hright">
+    <div class="hr-label">HORIZONTE TOTAL</div>
+    <div class="hr-big">24 meses</div>
+    <div class="hr-sep"></div>
+    <div class="hr-small">Mayo 2026<br>↓<br>Certificación ISO 27001:2022<br>Mayo 2028</div>
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <span style="font-family:'Courier New',monospace;font-size:10px;color:var(--darkgold);font-weight:bold;letter-spacing:1px">LEYENDA:</span>
+  <div class="leg"><div class="lbox" style="background:var(--green)"></div>Fase principal</div>
+  <div class="leg"><div class="lbox" style="background:var(--lightgreen)"></div>Fase paralela</div>
+  <div class="leg"><div class="lbox" style="background:var(--gold)"></div>Proceso continuo</div>
+  <div class="leg"><div class="lbox" style="background:var(--darkgold)"></div>Certificación</div>
+  <div class="leg"><div class="lbox" style="background:var(--danger)"></div>Hito de revisión</div>
+  <div class="leg-right">ISO/IEC 27001:2022 · OCTAVE Allegro · LFPDPPP México</div>
+</div>
+
+<!-- GANTT -->
+<div class="gantt">
+
+  <!-- Year row -->
+  <div class="year-row">
+    <div class="plabel" style="background:var(--cream);border-right:2px solid var(--green)"></div>
+    <div class="year-cols">
+      <div class="yc" style="grid-column:1/9">◀ 2026</div>
+      <div class="yc" style="grid-column:9/21">2027</div>
+      <div class="yc" style="grid-column:21/25">2028 ▶</div>
+    </div>
+  </div>
+
+  <!-- Month header -->
+  <div class="mhdr">
+    <div class="plabel">FASE / ACTIVIDAD</div>
+    <div class="months">
+      <div class="mc" style="grid-column:1">May</div>
+      <div class="mc" style="grid-column:2">Jun</div>
+      <div class="mc" style="grid-column:3">Jul</div>
+      <div class="mc qs" style="grid-column:4">Ago</div>
+      <div class="mc" style="grid-column:5">Sep</div>
+      <div class="mc" style="grid-column:6">Oct</div>
+      <div class="mc qs" style="grid-column:7">Nov</div>
+      <div class="mc" style="grid-column:8">Dic</div>
+      <div class="mc yr" style="grid-column:9">Ene</div>
+      <div class="mc" style="grid-column:10">Feb</div>
+      <div class="mc" style="grid-column:11">Mar</div>
+      <div class="mc qs" style="grid-column:12">Abr</div>
+      <div class="mc" style="grid-column:13">May</div>
+      <div class="mc" style="grid-column:14">Jun</div>
+      <div class="mc qs" style="grid-column:15">Jul</div>
+      <div class="mc" style="grid-column:16">Ago</div>
+      <div class="mc" style="grid-column:17">Sep</div>
+      <div class="mc qs" style="grid-column:18">Oct</div>
+      <div class="mc" style="grid-column:19">Nov</div>
+      <div class="mc" style="grid-column:20">Dic</div>
+      <div class="mc yr" style="grid-column:21">Ene</div>
+      <div class="mc" style="grid-column:22">Feb</div>
+      <div class="mc" style="grid-column:23">Mar</div>
+      <div class="mc" style="grid-column:24">Abr</div>
+    </div>
+  </div>
+
+  <!-- FASE 1+2 — cols 1–2 -->
+  <div class="prow">
+    <div class="plabel">
+      <div class="pnum">1–2</div>
+      <div class="pname-wrap"><div class="pname">Fundamentos y Cultura</div><div class="psub">CIA · Roles · Estructura · CSIRT</div></div>
+    </div>
+    <div class="bars-zone">
+      <div class="bar ga" style="grid-column:1/3">FASES 1 Y 2</div>
+    </div>
+  </div>
+
+  <!-- FASE 3 — cols 2–5 -->
+  <div class="prow">
+    <div class="plabel">
+      <div class="pnum">3</div>
+      <div class="pname-wrap"><div class="pname">Gestión de Activos</div><div class="psub">Inventario · Clasificación · Valoración</div></div>
+    </div>
+    <div class="bars-zone">
+      <div class="bar ga" style="grid-column:2/6">FASE 3 — Inventario de activos</div>
+    </div>
+  </div>
+
+  <!-- FASE 4 — cols 4–8 -->
+  <div class="prow">
+    <div class="plabel">
+      <div class="pnum">4</div>
+      <div class="pname-wrap"><div class="pname">Evaluación de Riesgos</div><div class="psub">OCTAVE Allegro · 8 pasos · Matriz</div></div>
+    </div>
+    <div class="bars-zone">
+      <div class="bar ga" style="grid-column:4/9">FASE 4 — OCTAVE Allegro</div>
+    </div>
+  </div>
+
+  <!-- FASE 5 — cols 6–9 (parallel) -->
+  <div class="prow">
+    <div class="plabel">
+      <div class="pnum">5</div>
+      <div class="pname-wrap"><div class="pname">Políticas de Seguridad</div><div class="psub">10 políticas · Registro maestro</div></div>
+    </div>
+    <div class="bars-zone">
+      <div class="bar gc" style="grid-column:6/10">FASE 5 — Políticas</div>
+    </div>
+  </div>
+
+  <!-- FASE 6 — cols 8–13 -->
+  <div class="prow">
+    <div class="plabel">
+      <div class="pnum">6</div>
+      <div class="pname-wrap"><div class="pname">Controles de Seguridad</div><div class="psub">SoA · MFA · SIEM · DLP · Backups</div></div>
+    </div>
+    <div class="bars-zone">
+      <div class="bar ga" style="grid-column:8/14">FASE 6 — Implementación de controles</div>
+    </div>
+  </div>
+
+  <!-- FASE 7 — cols 8–11 (parallel) -->
+  <div class="prow">
+    <div class="plabel">
+      <div class="pnum">7</div>
+      <div class="pname-wrap"><div class="pname">Cumplimiento Legal</div><div class="psub">LFPDPPP · ARCO · Aviso privacidad</div></div>
+    </div>
+    <div class="bars-zone">
+      <div class="bar gc" style="grid-column:8/12">FASE 7 — Cumplimiento LFPDPPP</div>
+    </div>
+  </div>
+
+  <!-- FASE 8 — cols 12–16 -->
+  <div class="prow">
+    <div class="plabel">
+      <div class="pnum">8</div>
+      <div class="pname-wrap"><div class="pname">Continuidad del Negocio</div><div class="psub">BCP · DRP · BIA · Pruebas</div></div>
+    </div>
+    <div class="bars-zone">
+      <div class="bar ga" style="grid-column:12/17">FASE 8 — BCP y DRP</div>
+    </div>
+  </div>
+
+  <!-- FASE 9 — cols 12–15 (parallel) -->
+  <div class="prow">
+    <div class="plabel">
+      <div class="pnum">9</div>
+      <div class="pname-wrap"><div class="pname">Gestión de Incidentes</div><div class="psub">CSIRT · Procedimiento 7 etapas</div></div>
+    </div>
+    <div class="bars-zone">
+      <div class="bar gc" style="grid-column:12/16">FASE 9 — CSIRT e Incidentes</div>
+    </div>
+  </div>
+
+  <!-- FASE 10 — cols 14–18 -->
+  <div class="prow">
+    <div class="plabel">
+      <div class="pnum">10</div>
+      <div class="pname-wrap"><div class="pname">Capacitación y Concientización</div><div class="psub">120 empleados · Phishing simulado</div></div>
+    </div>
+    <div class="bars-zone">
+      <div class="bar ga" style="grid-column:14/19">FASE 10 — Capacitación formal</div>
+    </div>
+  </div>
+
+  <!-- FASE 11 — cols 18–22 -->
+  <div class="prow">
+    <div class="plabel">
+      <div class="pnum">11</div>
+      <div class="pname-wrap"><div class="pname">Auditoría y Métricas</div><div class="psub">KPIs · Auditoría interna · Revisión</div></div>
+    </div>
+    <div class="bars-zone">
+      <div class="bar ga" style="grid-column:18/23">FASE 11 — Auditoría interna</div>
+    </div>
+  </div>
+
+  <!-- FASE 12 — cols 21–25 (ongoing) -->
+  <div class="prow">
+    <div class="plabel">
+      <div class="pnum">12</div>
+      <div class="pname-wrap"><div class="pname">Mejora Continua PDCA</div><div class="psub">Ciclo perpetuo · No conformidades</div></div>
+    </div>
+    <div class="bars-zone">
+      <div class="bar gd" style="grid-column:21/25">FASE 12 — PDCA continuo ▶</div>
+    </div>
+  </div>
+
+  <!-- CERTIFICACIÓN — cols 22–25 -->
+  <div class="cert-row">
+    <div class="cert-label">
+      <div class="cert-num">★</div>
+      <div class="pname-wrap"><div class="pname" style="color:var(--darkgold)">Certificación ISO 27001:2022</div><div class="psub">Auditoría externa · 2 etapas</div></div>
+    </div>
+    <div class="bars-zone" style="background:var(--bggold)">
+      <div class="bar ge" style="grid-column:22/25">★ CERTIFICACIÓN ISO 27001:2022</div>
+    </div>
+  </div>
+
+  <!-- MILESTONES -->
+  <div class="ms-row">
+    <div class="ms-label"><span>◆ HITOS DE REVISIÓN</span></div>
+    <div class="ms-zone">
+      <div class="ms" style="grid-column:1">
+        <span class="ms-ico" style="color:var(--danger)">◆</span>
+        <span class="ms-txt" style="color:var(--danger)">Aprobación<br>del Marco</span>
+      </div>
+      <div class="ms" style="grid-column:9">
+        <span class="ms-ico" style="color:var(--danger)">◆</span>
+        <span class="ms-txt" style="color:var(--danger)">Revisión<br>Semestral 1</span>
+      </div>
+      <div class="ms" style="grid-column:20">
+        <span class="ms-ico" style="color:var(--danger)">◆</span>
+        <span class="ms-txt" style="color:var(--danger)">Auditoría<br>Interna</span>
+      </div>
+      <div class="ms" style="grid-column:23">
+        <span class="ms-ico" style="color:var(--darkgold)">★</span>
+        <span class="ms-txt" style="color:var(--darkgold)">Certifi-<br>cación</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /gantt -->
+
+<!-- SUMMARY -->
+<div class="summary">
+  <div class="scard">
+    <div class="sc-label">Duración total propuesta</div>
+    <div class="sc-val">24 meses</div>
+    <div class="sc-sub">Mayo 2026 → Certificación ISO 27001 Mayo 2028</div>
+  </div>
+  <div class="scard" style="border-color:var(--gold)">
+    <div class="sc-label">Fases paralelas identificadas</div>
+    <div class="sc-val">3 solapamientos</div>
+    <div class="sc-sub">Fases 4–5 · Fases 6–7 · Fases 8–9 (optimizan tiempo)</div>
+  </div>
+  <div class="scard" style="border-color:var(--danger)">
+    <div class="sc-label">Hitos de revisión ejecutiva</div>
+    <div class="sc-val">4 puntos de control</div>
+    <div class="sc-sub">Aprobación · Revisión sem. 1 · Auditoría interna · Certificación</div>
+  </div>
+</div>
+
+<!-- MATRIX -->
+<div class="matrix">
+  <div class="mx-title">Responsables por etapa de implementación</div>
+  <div class="mx-grid">
+    <div class="mcard">
+      <div class="mc-role">Dirección General</div>
+      <ul class="mc-list">
+        <li>Aprobación del Documento Marco (May 2026)</li>
+        <li>Asignación presupuestal del SGSI</li>
+        <li>Designación formal del CISO</li>
+        <li>Revisiones semestrales del Comité</li>
+      </ul>
+    </div>
+    <div class="mcard" style="background:var(--midgreen)">
+      <div class="mc-role">CISO (por designar)</div>
+      <ul class="mc-list">
+        <li>Implementación de las 12 fases</li>
+        <li>Coordinación del CSIRT</li>
+        <li>Reporte mensual de avance</li>
+        <li>Preparación para auditoría externa</li>
+      </ul>
+    </div>
+    <div class="mcard" style="background:var(--lightgreen)">
+      <div class="mc-role">Propietarios de Activos</div>
+      <ul class="mc-list">
+        <li>Inventario de activos (Fase 3)</li>
+        <li>Validación de riesgos (Fase 4)</li>
+        <li>Aprobación de controles de área</li>
+        <li>Participación en auditorías internas</li>
+      </ul>
+    </div>
+    <div class="mcard" style="background:var(--darkgold)">
+      <div class="mc-role">Equipo TI / Custodios</div>
+      <ul class="mc-list">
+        <li>Implementación técnica de controles</li>
+        <li>Configuración MFA, SIEM, backups</li>
+        <li>Pruebas de DRP y restauración</li>
+        <li>Soporte en simulacros de incidentes</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="gold-bar"></div>
+<div class="footer">
+  <div class="fl">NOVATECH SOLUTIONS · HOJA DE RUTA SGSI · PROPUESTA SUJETA A APROBACIÓN EJECUTIVA</div>
+  <div class="fr">ISO/IEC 27001:2022 · OCTAVE Allegro · LFPDPPP México · Mayo 2026</div>
+</div>
+
+</div>
+</body>
+</html>

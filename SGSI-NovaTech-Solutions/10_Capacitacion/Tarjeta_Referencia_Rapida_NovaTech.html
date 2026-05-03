@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Tarjeta de Referencia Rápida · Seguridad · NovaTech Solutions</title>
+<style>
+@media print{body{margin:0;padding:0}.page{box-shadow:none}}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#1B3A2D;--midgreen:#2E5E48;--lightgreen:#4A8C6F;
+  --gold:#C17F24;--darkgold:#8B5E1A;--bggold:#FDF3E0;
+  --body:#2C2C2C;--silver:#999;--cream:#F7F4EE;
+  --danger:#B83232;--white:#FFFFFF;
+}
+body{background:#ccc;font-family:Georgia,serif;display:flex;justify-content:center;padding:28px 0}
+/* Carta: 816×1056px */
+.page{width:816px;min-height:1056px;background:var(--white);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.25)}
+
+/* HEADER */
+.hdr{background:var(--green);display:flex;min-height:86px}
+.hstripe{width:12px;background:var(--gold);flex-shrink:0}
+.hmain{flex:1;padding:14px 18px;display:flex;flex-direction:column;justify-content:center}
+.hlabel{font-family:'Courier New',monospace;font-size:8px;color:var(--gold);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:4px}
+.htitle{font-size:22px;font-weight:bold;color:var(--white);line-height:1.1}
+.hsub{font-style:italic;font-size:10.5px;color:var(--silver);margin-top:4px}
+.hbadge{background:#0F2318;width:110px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:10px}
+.hb-icon{font-size:30px;line-height:1}
+.hb-val{font-size:10px;font-weight:bold;color:var(--white);text-align:center;line-height:1.3}
+.hb-label{font-family:'Courier New',monospace;font-size:7px;color:var(--gold);letter-spacing:1px;text-align:center}
+
+/* CIA */
+.cia{display:grid;grid-template-columns:1fr 1fr 1fr;height:48px}
+.cc{display:flex;align-items:center;justify-content:center;gap:8px;padding:0 10px}
+.cc:nth-child(1){background:var(--green)}
+.cc:nth-child(2){background:var(--midgreen)}
+.cc:nth-child(3){background:var(--lightgreen)}
+.clet{font-size:24px;font-weight:bold;color:var(--gold);font-family:Georgia,serif;flex-shrink:0}
+.cright .cname{font-family:'Courier New',monospace;font-size:7.5px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase}
+.cright .cdesc{font-size:10px;color:rgba(255,255,255,.85);font-style:italic}
+
+/* MAIN GRID — 2 cols */
+.grid2{display:grid;grid-template-columns:1fr 1fr}
+
+/* Standard block */
+.blk{padding:11px 14px;border-bottom:1px solid #e8e4dc}
+.blk:nth-child(odd){border-right:1px solid #e8e4dc}
+.bh{display:flex;align-items:center;gap:7px;margin-bottom:8px}
+.bn{background:var(--green);color:var(--gold);font-family:'Courier New',monospace;font-size:9px;font-weight:bold;width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.bt{font-size:12.5px;font-weight:bold;color:var(--green)}
+.items{display:flex;flex-direction:column;gap:5px}
+.itm{display:flex;align-items:flex-start;gap:6px;font-size:10.5px;color:var(--body);line-height:1.35}
+.ii{font-size:13px;flex-shrink:0}
+.ib{font-weight:bold;color:var(--green)}
+.ir{font-weight:bold;color:var(--danger)}
+.in{font-size:9px;color:var(--silver);font-style:italic}
+
+/* PHISHING — full width, dark */
+.phish{grid-column:1/3;background:var(--green);padding:12px 14px;border-bottom:1px solid #0d2417}
+.ph-hdr{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.ph-badge{background:var(--danger);padding:5px 12px;display:flex;align-items:center;gap:8px}
+.ph-badge-icon{font-size:18px;color:var(--white)}
+.ph-badge-label{font-family:'Courier New',monospace;font-size:9px;font-weight:bold;color:var(--white);letter-spacing:1px}
+.ph-title{font-size:14px;font-weight:bold;color:var(--white);font-family:Georgia,serif}
+.ph-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-bottom:9px}
+.phsig{background:rgba(0,0,0,.25);padding:8px 9px;border-left:3px solid var(--danger)}
+.phn{font-family:'Courier New',monospace;font-size:8px;font-weight:bold;color:var(--danger);margin-bottom:3px}
+.pht{font-size:10.5px;font-weight:bold;color:var(--gold);line-height:1.2;margin-bottom:2px}
+.phb{font-size:9.5px;color:rgba(255,255,255,.82);line-height:1.3}
+.ph-cta{background:var(--danger);padding:7px 12px;display:flex;align-items:center;justify-content:center;gap:10px}
+.ph-cta-text{font-family:Georgia,serif;font-size:11px;font-weight:bold;color:var(--white)}
+
+/* REPORT FLOW — full width -->
+.rpt{grid-column:1/3;padding:11px 14px;background:var(--cream);border-bottom:1px solid #ddd9d0}
+.rpt-flow{display:grid;grid-template-columns:1fr 18px 1fr 18px 1fr;gap:0;align-items:start;margin-top:8px}
+.rs{background:var(--white);border:1px solid #ddd;border-top:3px solid var(--green);padding:9px 10px}
+.rsnum{background:var(--green);color:var(--gold);font-family:'Courier New',monospace;font-size:10px;font-weight:bold;width:20px;height:20px;display:flex;align-items:center;justify-content:center;margin-bottom:5px}
+.rst{font-size:11px;font-weight:bold;color:var(--green);margin-bottom:3px}
+.rsb{font-size:10px;color:var(--body);line-height:1.4}
+.rsb strong{color:var(--green)}
+.arrow{display:flex;align-items:center;justify-content:center;padding-top:26px;color:var(--gold);font-size:20px;font-weight:bold}
+
+/* COMMITMENTS — full width, gold theme */
+.cmt{grid-column:1/3;padding:11px 14px;border-bottom:1px solid #ddd9d0}
+.cmt-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:8px}
+.ci{display:flex;flex-direction:column;align-items:center;text-align:center;background:var(--green);padding:10px 8px;gap:5px}
+.ci-icon{font-size:20px;line-height:1}
+.ci-num{font-family:'Courier New',monospace;font-size:8px;color:var(--gold);font-weight:bold}
+.ci-text{font-size:9.5px;color:var(--white);line-height:1.35}
+.ci-line{width:24px;height:2px;background:var(--gold);margin:2px auto 0}
+
+/* KPI strip */
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);background:var(--green)}
+.kpi{padding:10px 12px;text-align:center;border-right:1px solid rgba(255,255,255,.12)}
+.kpi:last-child{border-right:none}
+.kv{font-size:26px;font-weight:bold;color:var(--gold);font-family:Georgia,serif;line-height:1}
+.kl{font-size:10.5px;font-weight:bold;color:var(--white);margin-top:2px;font-family:Georgia,serif}
+.ks{font-size:9px;color:var(--silver);font-style:italic;margin-top:1px}
+
+/* FOOTER */
+.gold-bar{height:5px;background:var(--gold)}
+.footer{background:#0F2318;display:flex;align-items:center;justify-content:space-between;padding:8px 16px}
+.fl{font-family:'Courier New',monospace;font-size:8px;color:var(--gold);letter-spacing:.8px}
+.fr{font-family:'Courier New',monospace;font-size:8px;color:var(--silver)}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="hdr">
+    <div class="hstripe"></div>
+    <div class="hmain">
+      <div class="hlabel">Tarjeta de Referencia Rápida · Fase 10 · Capacitación y Concientización</div>
+      <div class="htitle">Mi Guía de Seguridad de la Información</div>
+      <div class="hsub">NovaTech Solutions · Para todos los colaboradores · Monterrey, México · 2025</div>
+    </div>
+    <div class="hbadge">
+      <div class="hb-icon">🛡️</div>
+      <div class="hb-label">ISO/IEC</div>
+      <div class="hb-val">27001:2022</div>
+      <div class="hb-label" style="margin-top:4px">LFPDPPP</div>
+      <div class="hb-val">México</div>
+    </div>
+  </div>
+
+  <!-- CIA -->
+  <div class="cia">
+    <div class="cc"><div class="clet">C</div><div class="cright"><div class="cname">Confidencialidad</div><div class="cdesc">Solo accede quien está autorizado</div></div></div>
+    <div class="cc"><div class="clet">I</div><div class="cright"><div class="cname">Integridad</div><div class="cdesc">Información exacta y sin alteraciones</div></div></div>
+    <div class="cc"><div class="clet">A</div><div class="cright"><div class="cname">Disponibilidad</div><div class="cdesc">Accesible cuando se necesita</div></div></div>
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="grid2">
+
+    <!-- B1: Buenas prácticas -->
+    <div class="blk">
+      <div class="bh"><div class="bn">01</div><div class="bt">Buenas Prácticas Diarias</div></div>
+      <div class="items">
+        <div class="itm"><div class="ii">🔐</div><div><span class="ib">Contraseñas únicas</span> por sistema. Usa el gestor corporativo.<br><span class="in">Una contraseña comprometida lo pone todo en riesgo.</span></div></div>
+        <div class="itm"><div class="ii">📱</div><div><span class="ib">Activa MFA siempre:</span> correo, repositorios y CRM sin excepción.</div></div>
+        <div class="itm"><div class="ii">🚪</div><div><span class="ib">Cierra sesión</span> al terminar, especialmente en equipos compartidos.<br><span class="in">Incidente real: sesión abierta → acceso no autorizado a las 3am.</span></div></div>
+        <div class="itm"><div class="ii">📧</div><div><span class="ib">Verifica el destinatario</span> antes de enviar información sensible.<br><span class="in">Incidente real: datos de cliente enviados a la dirección equivocada.</span></div></div>
+        <div class="itm"><div class="ii">⛔</div><div><span class="ir">Nunca</span> compartas tus credenciales. Son personales e intransferibles.</div></div>
+      </div>
+    </div>
+
+    <!-- B2: Uso aceptable -->
+    <div class="blk">
+      <div class="bh"><div class="bn">02</div><div class="bt">Política de Uso Aceptable</div></div>
+      <div class="items">
+        <div class="itm"><div class="ii">✅</div><div><span class="ib">Correo corporativo</span> solo para actividades laborales. Cifra lo confidencial.</div></div>
+        <div class="itm"><div class="ii">✅</div><div><span class="ib">Solo nube autorizada por TI</span> para almacenar archivos de trabajo.</div></div>
+        <div class="itm"><div class="ii">✅</div><div><span class="ib">Dispositivos personales</span> no deben tener información confidencial de NovaTech.</div></div>
+        <div class="itm"><div class="ii">⛔</div><div><span class="ir">Prohibido</span> instalar software sin autorización de TI en equipos corporativos.</div></div>
+        <div class="itm"><div class="ii">⛔</div><div><span class="ir">Prohibido</span> compartir credenciales de acceso bajo cualquier circunstancia.</div></div>
+      </div>
+    </div>
+
+    <!-- B3: Casos reales -->
+    <div class="blk">
+      <div class="bh"><div class="bn">03</div><div class="bt">Por Qué Importa — Casos Reales</div></div>
+      <div class="items">
+        <div class="itm"><div class="ii">🔓</div><div><span class="ir">Repositorio comprometido:</span> sesión abierta en equipo compartido → descarga de código desde IP desconocida a las 3am.</div></div>
+        <div class="itm"><div class="ii">📨</div><div><span class="ir">Filtración silenciosa:</span> correo con datos de contacto y detalles técnicos de cliente enviado a dirección incorrecta → riesgo legal LFPDPPP.</div></div>
+        <div class="itm"><div class="ii">🖥️</div><div><span class="ir">CRM caído 6 horas:</span> actualización mal configurada sin plan de recuperación → clientes frustrados · proyectos retrasados.</div></div>
+      </div>
+    </div>
+
+    <!-- B4: Capacitación por rol -->
+    <div class="blk">
+      <div class="bh"><div class="bn">04</div><div class="bt">Capacitación según tu Rol</div></div>
+      <div class="items">
+        <div class="itm"><div class="ii">💻</div><div><span class="ib">Desarrollo:</span> codificación segura OWASP, manejo de secretos, prevención SQL/XSS, gestión de repositorios Git.</div></div>
+        <div class="itm"><div class="ii">📞</div><div><span class="ib">Soporte y Clientes:</span> datos personales LFPDPPP, derechos ARCO, protocolo de envío de información confidencial.</div></div>
+        <div class="itm"><div class="ii">💼</div><div><span class="ib">Administración:</span> información financiera, expedientes, segregación de funciones, accesos privilegiados.</div></div>
+        <div class="itm"><div class="ii">👥</div><div><span class="ib">Todos:</span> phishing, cierre de sesión, uso aceptable, canales de reporte de incidentes.</div></div>
+      </div>
+    </div>
+
+    <!-- PHISHING — full width -->
+    <div class="phish">
+      <div class="ph-hdr">
+        <div class="ph-badge">
+          <div class="ph-badge-icon">🎣</div>
+          <div>
+            <div class="ph-badge-label">AMENAZA #1</div>
+            <div style="font-size:11px;font-weight:bold;color:var(--white);font-family:Georgia,serif">Reconoce el Phishing</div>
+          </div>
+        </div>
+        <div style="flex:1;height:1px;background:rgba(255,255,255,.15);margin:0 12px"></div>
+        <div style="font-family:Georgia,serif;font-style:italic;font-size:11px;color:rgba(255,255,255,.7)">Amenaza #1 en NovaTech — 4 de cada 5 brechas empiezan con un clic</div>
+      </div>
+      <div class="ph-grid">
+        <div class="phsig">
+          <div class="phn">SEÑAL 1</div>
+          <div class="pht">Urgencia artificial</div>
+          <div class="phb">"Tu cuenta se suspenderá…" Los atacantes crean pánico para que actúes sin pensar.</div>
+        </div>
+        <div class="phsig">
+          <div class="phn">SEÑAL 2</div>
+          <div class="pht">Remitente sospechoso</div>
+          <div class="phb">El nombre parece legítimo pero el dominio no coincide con la empresa real.</div>
+        </div>
+        <div class="phsig">
+          <div class="phn">SEÑAL 3</div>
+          <div class="pht">Enlace diferente</div>
+          <div class="phb">Pasa el cursor ANTES de clic. Si la URL que aparece es distinta, no entres.</div>
+        </div>
+        <div class="phsig">
+          <div class="phn">SEÑAL 4</div>
+          <div class="pht">Piden credenciales</div>
+          <div class="phb">NovaTech NUNCA pedirá tu contraseña por correo, chat o llamada. Nunca.</div>
+        </div>
+        <div class="phsig">
+          <div class="phn">SEÑAL 5</div>
+          <div class="pht">Adjunto inesperado</div>
+          <div class="phb">¿Un archivo que no esperabas? Verifica con el remitente antes de abrirlo.</div>
+        </div>
+      </div>
+      <div class="ph-cta">
+        <div class="ph-cta-text">⚠&nbsp;&nbsp;Ante la duda: NO hagas clic — Reporta al CISO de inmediato&nbsp;&nbsp;⚠</div>
+      </div>
+    </div>
+
+    <!-- REPORT FLOW — full width -->
+    <div class="rpt">
+      <div class="bh"><div class="bn">05</div><div class="bt">¿Cómo Reportar un Incidente? — 3 Pasos</div></div>
+      <div class="rpt-flow">
+        <div class="rs">
+          <div class="rsnum">1</div>
+          <div class="rst">🔍 DETECTA</div>
+          <div class="rsb">Algo raro: correo sospechoso, acceso inusual, sistema lento, solicitud de contraseña, archivo inesperado.<br><em>Si dudas, ya es motivo de reporte.</em></div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="rs">
+          <div class="rsnum">2</div>
+          <div class="rst">🔔 REPORTA — Ahora</div>
+          <div class="rsb">
+            <strong>Correo:</strong> seguridad@novatech.mx<br>
+            <strong>Ticket:</strong> sistema interno de SI<br>
+            <strong>Verbal:</strong> líder de área → escala en 30 min<br>
+            <em>No lo resuelvas solo. No esperes.</em>
+          </div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="rs">
+          <div class="rsnum">3</div>
+          <div class="rst">📋 DOCUMENTA</div>
+          <div class="rsb">Anota fecha y hora, qué observaste, en qué sistema, si hiciste clic o abriste algo. El CSIRT necesita esta información para investigar.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMMITMENTS — full width, green theme -->
+    <div class="cmt">
+      <div class="bh"><div class="bn" style="background:var(--gold);color:var(--green)">06</div><div class="bt" style="color:var(--darkgold)">Mis 5 Compromisos de Seguridad</div></div>
+      <div class="cmt-grid">
+        <div class="ci">
+          <div class="ci-icon">🔐</div>
+          <div class="ci-num">COMPROMISO 1</div>
+          <div class="ci-line"></div>
+          <div class="ci-text">Usaré contraseñas únicas y activaré MFA en todos los sistemas</div>
+        </div>
+        <div class="ci">
+          <div class="ci-icon">🚪</div>
+          <div class="ci-num">COMPROMISO 2</div>
+          <div class="ci-line"></div>
+          <div class="ci-text">Cerraré sesión siempre al terminar, en cualquier equipo</div>
+        </div>
+        <div class="ci">
+          <div class="ci-icon">📧</div>
+          <div class="ci-num">COMPROMISO 3</div>
+          <div class="ci-line"></div>
+          <div class="ci-text">Verificaré el destinatario antes de enviar información sensible</div>
+        </div>
+        <div class="ci">
+          <div class="ci-icon">🔑</div>
+          <div class="ci-num">COMPROMISO 4</div>
+          <div class="ci-line"></div>
+          <div class="ci-text">Nunca compartiré mis credenciales con nadie bajo ningún pretexto</div>
+        </div>
+        <div class="ci">
+          <div class="ci-icon">🔔</div>
+          <div class="ci-num">COMPROMISO 5</div>
+          <div class="ci-line"></div>
+          <div class="ci-text">Reportaré cualquier anomalía sin importar su tamaño</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <!-- KPI STRIP -->
+  <div class="kpi-strip">
+    <div class="kpi"><div class="kv">≥95%</div><div class="kl">Empleados capacitados</div><div class="ks">Meta anual del programa</div></div>
+    <div class="kpi"><div class="kv">&lt;5%</div><div class="kl">Clic en phishing simulado</div><div class="ks">Meta a los 12 meses</div></div>
+    <div class="kpi"><div class="kv">≥80%</div><div class="kl">Calificación promedio</div><div class="ks">En evaluaciones por rol</div></div>
+    <div class="kpi"><div class="kv">100%</div><div class="kl">Sesiones con registro</div><div class="ks">Evidencia para auditorías</div></div>
+  </div>
+
+  <div class="gold-bar"></div>
+  <div class="footer">
+    <div class="fl">NOVATECH SOLUTIONS · TARJETA DE REFERENCIA RÁPIDA · SEGURIDAD DE LA INFORMACIÓN · 2025</div>
+    <div class="fr">Imprime y conserva · CISO: seguridad@novatech.mx · Confidencial — Uso Interno</div>
+  </div>
+
+</div>
+</body>
+</html>
